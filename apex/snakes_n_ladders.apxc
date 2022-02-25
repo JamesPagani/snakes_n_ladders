@@ -1,0 +1,62 @@
+public class snakes_n_ladders {
+    public static void play(Integer players, Integer height, Integer width) {
+        Integer board_size;
+        Integer die;
+        Boolean isDone;
+        Integer[] board;
+        Integer[] positions;
+        
+        if (players <= 0) {
+            System.debug('You need at least one player!');
+            return;
+        }
+        if (height <= 0 || width <= 0) {
+            System.debug('This board is too small!');
+            return;
+        }
+        // Set the players and the board
+        board_size = width * height;
+        positions = new Integer[players];
+        board = new Integer[board_size];
+        
+        // Set positions to zero
+        for (Integer i = 0; i < players; i++) {
+            positions[i] = 0;
+        }
+        
+        // Fill the board
+        for (Integer i = 1; i < board_size; i++) {
+            if(Math.random() > (2/3) && board[i] != -1){
+                board[i] = Integer.valueof(1 + (Math.random()) * (board_size - 2));
+                board[board[i]] = -1;
+            }
+        }
+        
+        // Begin the game
+        isDone = false;
+        while (!isDone) {
+            for (Integer p = 0; p < players; p++) {
+                die = Integer.valueOf(1 + (Math.random()) * 6);
+                System.debug('Player ' + p + ' rolled ' + die);
+                positions[p] += die;
+                System.debug('Player ' + p + ' moved to square ' + positions[p]);
+                // If someone lands on the final square (or beyond), stop the game.
+                if (positions[p] >= board_size) {
+                    isDone = true;
+                    System.debug('Player ' + p + ' won!');
+                    break;
+                }
+                // Check if the player landed on a snake/ladder
+                if (board[positions[p]] > 0) {
+                    if (board[positions[p]] < positions[p]){
+                        System.debug('Player ' + p + ' went down a snake, returning to square ' + board[positions[p]]);
+                    }
+                    else{
+                        System.debug('Player ' + p + ' climbed some stairs, ascending to square ' + board[positions[p]]);
+                    }
+                    positions[p] = board[positions[p]];
+                }
+            }
+        }
+    }
+}

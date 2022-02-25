@@ -66,16 +66,21 @@ void snakes_n_ladders(int num_players, int board_size)
 		/* Move all players per turn */
 		for (int p = 0; p < num_players; p++)
 		{
+			/* Roll a die and move the player */
 			die = 1 + rand() / ((RAND_MAX + 1u) / 6);
 			printf("Player %d rolled %d\n", p + 1, die);
 			positions[p] += die;
 			printf("Player %d landed on square %d\n", p + 1, positions[p]);
+
+			/* Finish the game if someone wins */
 			if (positions[p] >= board_size)
 			{
 				isDone = 1;
 				printf("Player %d won!\n", p + 1);
 				break;
 			}
+			
+			/* If this square is a snake/ladder, follow it */
 			if (board[positions[p]] > 0)
 			{
 				if (board[positions[p]] < positions[p])
@@ -98,7 +103,14 @@ void snakes_n_ladders(int num_players, int board_size)
 
 /** 
  * main - Entry point
+ * @argc: Amount of arguments
+ * @argv: List of arguments (program name included)
  * Return: 1 on success, any value on failure.
+ * ARGUMENTS (IN ORDER):
+ * - Name of the program
+ * - Number of players
+ * - Height of the board
+ * - Width of the board
  */
 int main(int argc, char *argv[])
 {

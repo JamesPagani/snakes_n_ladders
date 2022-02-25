@@ -2,14 +2,7 @@
 The classic board game of snakes and ladders, on your CLI (and CPU-controlled only)!
 
 ## About this project
-Snakes N Ladders is a CLI project in which computers play the classic game of Snakes and Ladders. The user can specify the number of players on the board as well as the position of all snakes and ladders and where they go.
-
-### Quick explaination of the board game
-There are `height x length` squares on the board. The goal is to reach the final square at `height x length`. Some of these square can be the bottom of a ladder, which will take you fowards, or the head of a snake, which will return you to a previous square.
-
-## Technical information
-- Language: C (Compiled on gcc 9.3.0)
-- Developed on: Ubuntu 20 LTS
+This is a CPU-played recreation of the "Snakes and Ladders" board game, in which the players must reach the last square of the board while climbing ladders and sliding down through snakes. To randomize the board and the movement of the players, a pseudo-random generator is used to populate the board and to roll the die.
 
 ## How 2 Run
 
@@ -28,8 +21,12 @@ $ gcc snakes_n_ladders.c -o snakes_n_ladders
 3. Run the program.
 ```
 # Assuming default name...
-$ ./a.out
+$ ./a.out 2 5 5
 ```
+The arguments you *need* to pass to the program are:
+- Number of players
+- Height of the board
+- Width of the board
 
 4. Enjoy.
 ***
